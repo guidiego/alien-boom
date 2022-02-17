@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple game made with PixiJS and same Spine Demo Assets",
   "scripts": {
-    "build": "rm -rf dist && webpack --mode production",
+    "build": "rm -rf dist && webpack",
     "dev": "webpack serve --mode development"
   },
   "repository": {

@@ -37,6 +37,9 @@ module.exports = {
       }
     ],
   },
+  optimization: {
+    minimize: false
+  },
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'),
