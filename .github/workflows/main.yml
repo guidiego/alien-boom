@@ -5,14 +5,14 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: 🛎️ Checkout
         uses: actions/checkout@v2
 
       - name: 🔧 Install
-        run: npm run install
+        run: npm install
 
       - name: 🔧 Build
         run: npm run build
