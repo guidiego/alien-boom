@@ -65698,6 +65698,7 @@ var Game = /*#__PURE__*/function (_Application) {
 
     _defineProperty(_assertThisInitialized(_this), "scenes", {});
 
+    _this.loader.baseUrl = window.location.origin + '/' + window.location.pathname.replace(/\//, '');
     document.body.append(_this.view);
     window.addEventListener('resize', function () {
       _this.renderer.resize(window.innerWidth, window.innerHeight);
