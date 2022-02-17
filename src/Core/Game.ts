@@ -12,6 +12,7 @@ export class Game extends Application {
 
   constructor(props: IApplicationOptions) {
     super(props);
+    this.loader.baseUrl = window.location.origin + '/' + window.location.pathname.replace(/\//, '');
     document.body.append(this.view);
 
     window.addEventListener('resize', () => {
@@ -20,7 +21,6 @@ export class Game extends Application {
         window.innerHeight,
       )
     });
-
   }
 
   get currentScene() {
