@@ -35,11 +35,17 @@ export class ShootContainer extends GameObject<Container> {
     return this.lasers.find((laser) => this.checkCollision(laser, body));
   }
 
-  removeLaser(hash) {
-    this.lasers = this.lasers.filter((laser) => laser.hash == hash)
-  }
 
   update() {
+    this.lasers = this.lasers.filter((laser) => {
+      if (laser.inactive) {
+        this.screenObj.removeChild(laser.realObject);
+        return false;
+      }
+
+      return true;
+    });
+
     this.lasers.forEach((laser) => laser.update());
   }
 }

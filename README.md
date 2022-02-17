@@ -1,7 +1,4 @@
-# pixijs-test
+## Alien Boom
+Alien Boom it's a simple game using some Demos from Spine website with an basic mecanic of explode zoombies.
 
-- [ ] Remove lasers out from screen
-- [ ] Bad animations
-  - [ ] Jump + Shoot
-  - [ ] Shoot + Walk
-- [ ] Entry Screen
+The purpose of this project it's testing some PixiJS stuff. That is my first project using pixi, any comment will be welcomed!

@@ -7,7 +7,6 @@ export class Player extends SpineObject {
   static spineAssetPath = '/sprites/player/spineboy.json'
 
   private life = 5;
-  private speed = 5;
   private curAnimation = 'portal';
   private lastAnimation = null;
 
@@ -41,6 +40,11 @@ export class Player extends SpineObject {
 
     this.state.addListener({
       complete: (e) => {
+        if (e.animation.name === 'death') {
+          game.stop();
+          return game.callScene('DeadScene');
+        }
+
         if (e.animation.name === 'jump' || e.animation.name === 'shoot') {
           this.curAnimation = this.lastAnimation;
           this.state.setAnimation(0, this.lastAnimation, true);

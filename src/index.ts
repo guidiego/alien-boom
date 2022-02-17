@@ -1,7 +1,9 @@
 import Game from "./Core/Game";
 import MainScene from "./Scene/MainScene";
+import EntryScene from "./Scene/EntryScene";
 
 import { game, setGameInManager } from "./Manager/Game";
+import DeadScene from "./Scene/DeadScene";
 
 
 setGameInManager(
@@ -12,4 +14,7 @@ setGameInManager(
 );
 
 game.addScene(MainScene);
-game.startScene('MainScene');
+game.addScene(EntryScene);
+game.addScene(DeadScene);
+
+game.startScene('EntryScene');

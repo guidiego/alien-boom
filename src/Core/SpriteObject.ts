@@ -3,7 +3,7 @@ import { game } from "../Manager/Game";
 import { Sprite } from "pixi.js";
 
 export class SpriteObject extends GameObject<Sprite> {
-  static spriteAssetPath = '/sprites/laser.png';
+  static spriteAssetPath = '';
   static dataProp = 'texture';
 
   constructor(data) {

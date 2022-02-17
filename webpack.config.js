@@ -6,8 +6,9 @@ module.exports = {
   entry: path.resolve('.', '/src', 'index.ts'),
   output: {
     path: __dirname + '/dist',
-    filename: 'game.js'
+    filename: 'game.js',
   },
+  target: 'web',
   resolve: {
     extensions: ['.ts', '.js'],
   },

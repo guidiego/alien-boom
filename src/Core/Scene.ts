@@ -18,8 +18,13 @@ export class Scene extends Container {
     this.goAssets.push(go);
   }
 
-  addGameObject(go: IGameObject) {
-    this.goClasses.push(go);
+  addGameObject(go: IGameObject | GameObject, optionalName: string = '') {
+    if (go instanceof GameObject) {
+      this.goIntances[optionalName] = go;
+      this.addChild(go.realObject);
+    } else {
+      this.goClasses.push(go);
+    }
   }
 
   start() {
@@ -30,7 +35,7 @@ export class Scene extends Container {
     Object.values(this.goIntances).forEach((go) => go.update());
   }
 
-  setupEnd(resources: LoaderResource) {
+  setupEnd(resources: Record<string, LoaderResource>) {
     this.goAssets.forEach((GO) => {
       GO.assetHolder = resources[GO.name][GO.dataProp];
     });
@@ -43,8 +48,8 @@ export class Scene extends Container {
     });
   }
 
-  findGameObject(name) {
-    return this.goIntances[name];
+  findGameObject<T>(name): T {
+    return this.goIntances[name] as any as T;
   }
 
 

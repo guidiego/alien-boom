@@ -1,7 +1,7 @@
-import { Application } from "pixi.js";
+import Game from "../Core/Game";
 
-export let game;
+export let game: Game;
 
-export const setGameInManager = (_game: Application) => {
+export const setGameInManager = (_game: Game) => {
   game = _game;
 }

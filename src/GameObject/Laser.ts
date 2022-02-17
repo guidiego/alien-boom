@@ -1,12 +1,13 @@
 import { LoaderResource } from "pixi.js";
 import SpriteObject from "../Core/SpriteObject";
-import { game } from "../Manager/Game";
 import { deltaTime } from "../Manager/Time";
 
 export class Laser extends SpriteObject {
+  static spriteAssetPath = '/sprites/laser.png';
   static assetHolder: LoaderResource['texture'];
-  private speed = 5;
+  private speed = 9;
   private _hash: string;
+  private _inactive: boolean = false;
 
   constructor(hash: string) {
     super(Laser.assetHolder);
@@ -18,13 +19,19 @@ export class Laser extends SpriteObject {
     return this._hash;
   };
 
+  get inactive() {
+    return this._inactive;
+  }
+
   destroy() {
-    if (this.realObject.parent) {
-      this.realObject.parent.removeChild(this.realObject);
-    }
+    this._inactive = true;
   }
 
   update() {
+    if (this._inactive) {
+      return this.realObject.destroy();
+    }
+
     const direction = this.scale.x > 0 ? 1 : -1;
     this.position.set(
       this.position.x + (deltaTime * this.speed * direction),

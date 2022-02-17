@@ -1,5 +1,6 @@
 import 'pixi-spine';
-import { Application, IApplicationOptions } from "pixi.js";
+
+import { Application, IApplicationOptions, Ticker, TickerCallback } from "pixi.js";
 import { IScene, Scene } from "./Scene";
 import { setDeltaTime, setStartTime } from '../Manager/Time';
 import GameObject from './GameObject';
@@ -7,6 +8,7 @@ import GameObject from './GameObject';
 export class Game extends Application {
   private scenes: Record<string, IScene> = {};
   private scene: Scene;
+  private ticketFunction: TickerCallback<any>;
 
   constructor(props: IApplicationOptions) {
     super(props);
@@ -21,11 +23,25 @@ export class Game extends Application {
 
   }
 
+  get currentScene() {
+    return this.scene;
+  }
+
+  stop() {
+    this.ticker.destroy();
+  }
+
+  callScene(sceneName: string) {
+    this.ticker.remove(this.ticketFunction);
+    this.scene.parent.removeChild(this.scene);
+    this.startScene(sceneName);
+  }
+
   addScene(scene: IScene) {
     this.scenes[scene.name] = scene;
   }
 
-  findGameObjectInCurrentScene(name: string) {
+  findGameObjectInCurrentScene<T>(name: string): T {
     return this.scene.findGameObject(name);
   }
 
@@ -44,13 +60,15 @@ export class Game extends Application {
       this.scene.start();
 
       setStartTime()
-      this.ticker.add((delta) => {
+      this.ticketFunction = (delta) => {
         setDeltaTime(delta);
 
         if (!this.scene.blockLoop) {
           this.scene.update();
         }
-      })
+      };
+
+      this.ticker.add(this.ticketFunction)
     });
   }
 }
